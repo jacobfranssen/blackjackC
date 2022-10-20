@@ -17,7 +17,7 @@ public:
     };
 
 };
-
+// hey wereld
 class card_dek{
 public:
 
@@ -65,3 +65,7 @@ int main() {
 
     return 0;
 }
+=======
+
+// THIS IS THE WAY
+>>>>>>> 34a0a63d60ae0adb3261843db58aed4f25dbb4cb
