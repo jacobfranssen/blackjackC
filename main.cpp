@@ -4,15 +4,13 @@
 #include <fstream>
 #include <time.h>
 
-using namespace std;
-
 class player{
 public:
 
     int b=4;
 
     void clear_hand(void){
-        array<int, 21> a;
+        std::array<int, 21> a;
         for(int i=0; i<a.size();i++){
             a[i]=0;
         };
@@ -28,7 +26,7 @@ int main() {
 
     player player1;
     player player2;
-    
+
     char carddeck[13] = {"2","3","4","5","6","7","8","9","10","J","Q","K","A"};
 
     player1.clear_hand();
@@ -37,7 +35,7 @@ int main() {
     srand((unsigned int)time(NULL));
     int r=rand();
 
-    cout << r << std::endl;
+    std::cout << r << std::endl;
 
     const int CARDS = 52;
     int card[CARDS];                        // the 'card' array represents all of the cards
