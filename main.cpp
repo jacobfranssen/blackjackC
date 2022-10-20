@@ -27,6 +27,8 @@ int main() {
     std::cout << "Hello, World!" << std::endl;
     player player1;
     player1.clear_hand();
+
+    // tot hier sript online
     srand((unsigned int)time(NULL));
 
     int r=rand();
