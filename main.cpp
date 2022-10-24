@@ -70,8 +70,6 @@ public:
     }
 };
 
-
-
 class bot{
 public:
     std:: string Name="name";

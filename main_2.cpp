@@ -8,6 +8,7 @@
 class carddeck{
 public:
     int number_of_decks;
+    int remaining_cards = 52;
     std::vector<int> carddeck = {2,3,4,5,6,7,8,9,10,10,10,10,11,2,3,4,5,6,7,8,9,10,10,10,10,11,2,3,4,5,6,7,8,9,10,10,10,10,11,2,3,4,5,6,7,8,9,10,10,10,10,11};
     std::vector<int> finaldeck = {};
 
@@ -16,9 +17,27 @@ public:
         for(int i = 0; i<number; i++){
             finaldeck.insert(finaldeck.end(),carddeck.begin(), carddeck.end());
         }
-    }
+        remaining_cards = remaining_cards * number_of_decks;
+    }    
 
-    
+    int draw_card(){
+        int temp = 0;
+
+        if(remaining_cards > 0){
+            int position = rand() % remaining_cards;
+            temp = finaldeck[position];         // drawn card
+
+            finaldeck[position] = finaldeck[remaining_cards-1];
+            finaldeck[remaining_cards - 1] = temp;
+
+            std::cout << temp << std::endl;
+            remaining_cards --;
+            finaldeck.resize(remaining_cards);
+        }
+
+            
+        return temp;
+    }
 };
 
 class dealer{
@@ -307,16 +326,12 @@ public:
 
 };
 
-// General functions that can be used in player, bot and dealer classes.
 class Blackjack{
 public:
     std::vector<player> players;
     int number_of_players=0;
     int players_with_name=0;
-    int number_of_players;
-    void set_number_players(int number){
-        number_of_players=number;
-    }
+
     void import_player(player player_n){
         players[number_of_players]=player_n;
         number_of_players+=1;
@@ -386,12 +401,6 @@ int main() {
     int Number_of_Decks = initialisation_number_of_decks();                             //This line obtains the amount of decks that will be used. 
     carddeck deck;
     deck.set_number_of_decks(Number_of_Decks);
-    std::cout << deck.finaldeck[80] << std::endl;
-
-    for(int i = 0; i<Amount_of_Players; i++){
-        player player1;
-
-    }
 
     return 0;
 }
