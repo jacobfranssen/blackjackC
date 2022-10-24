@@ -3,6 +3,7 @@
 #include <string>
 #include <fstream>
 #include <time.h>
+#include <vector>
 
 class dealer{
 public:
