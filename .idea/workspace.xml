@@ -9,7 +9,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14ea874a-1331-47f1-8b6d-7457a708fea0" name="Changes" comment="jacob" />
+    <list default="true" id="14ea874a-1331-47f1-8b6d-7457a708fea0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,7 +40,7 @@
     "WebServerToolWindowFactoryState": "false",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "last_opened_file_path": "C:/Users/jacob/CLionProjects/blackjackclassplayer1"
+    "last_opened_file_path": "C:/Users/jacob/OneDrive/Documenten/GitHub/blackjackC"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -72,7 +75,8 @@
       <option name="presentableId" value="Default" />
       <updated>1666251957333</updated>
       <workItem from="1666251958864" duration="2517000" />
-      <workItem from="1666274966353" duration="4624000" />
+      <workItem from="1666274966353" duration="5529000" />
+      <workItem from="1666691789989" duration="3000" />
     </task>
     <task id="LOCAL-00001" summary="testjacob">
       <created>1666252358867</created>
@@ -102,7 +106,21 @@
       <option name="project" value="LOCAL" />
       <updated>1666615128152</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="jacob">
+      <created>1666615631076</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1666615631076</updated>
+    </task>
+    <task id="LOCAL-00006" summary="jacob">
+      <created>1666615680995</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1666615680995</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

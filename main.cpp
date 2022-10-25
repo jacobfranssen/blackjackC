@@ -339,33 +339,56 @@ int main() {
     player2.get_card(3);
     player2.get_card(11);
     player2.display_hand();
-    std::cout<< "score of "<< player2.Name<< " is "<< player2.calculate_score()<<std::endl;
-
-    dealer Dealer;
-    Dealer.clear_hand();
-    Dealer.get_card(4);
-    Dealer.get_card(5);
-    Dealer.display_second_card();
-    Dealer.display_full_hand();
-
-    bot Computer;
-    Computer.set_strategy("Basic strategy");
-    Computer.clear_hand();
-    Computer.set_name("Henk");
-    Computer.get_card(11);
-    Computer.get_card(7);
-    Computer.get_card(4);
-    std::cout<<Computer.strategyA[2][4]<<std::endl; //first value row, second value column
-    std::cout<<Computer.make_choice(8);
+    std::cout<< "score of "<< player2.Name<< " is "<< player2.calculate_score();
 
 
-    Blackjack game;
-    game.import_player(player1);
-    game.import_player(player2);
-    player player3;
-    game.import_player(player3);
-    game.give_names();
 
+
+
+
+
+
+
+
+
+
+
+    std::array<int, 52> carddeck = {2,3,4,5,6,7,8,9,10,10,10,10,11,2,3,4,5,6,7,8,9,10,10,10,10,11,2,3,4,5,6,7,8,9,10,10,10,10,11,2,3,4,5,6,7,8,9,10,10,10,10,11};
+
+    player1.clear_hand();
+    player2.clear_hand();
+
+    srand((unsigned int)time(NULL));
+    int r=rand();
+
+//    std::cout << r << std::endl;
+
+    const int CARDS = 52;
+    int card[CARDS];                        // the 'card' array represents all of the cards
+    int i, deck_cards;
+    // initialization
+    for (i=0; i< CARDS; i++)
+        card[i]=i;
+    // 'deck_cards' is the limit of the deck, it separates the
+    // cards still inside the deck from the extracted ones
+    deck_cards = CARDS;
+
+    // random extraction of five cards
+    for (i=0; i<5; i++)
+    {
+        int r = rand() % deck_cards;        // r is the newly extracted card index
+
+        int temp = card[r];                 // the trick is here: we move the choosen card at the current deck
+        card[r] = card[deck_cards-1];       // limit and decrease the deck size by one.
+        card[deck_cards-1] = temp;          // this is accomplished swapping card[r] with card[deck_cards-1]
+
+        deck_cards--;
+    }
+    // now let't print out the random choosen cards
+//    for (i=0; i<5; i++)
+//    {
+//        printf("extracted card[%d]=%d\n", i, card[deck_cards+i]);
+//    }
 
     return 0;
 }
