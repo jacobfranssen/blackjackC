@@ -81,7 +81,6 @@ public:
     }
 
     int calculate_score(){
-        //int score=0;
         int index= 0;
         for(int value:hand){
             if(value==11){
@@ -279,9 +278,16 @@ int main() {
 
         for(int n = 0; n < game.number_of_players; n++){
             std::string choice = "Y"; 
+            int score = players[n].calculate_score();
             if(players[n].calculate_score() != 21){
                 std::cout << players[n].Name << ", do you want to draw another card? " << std::endl;
                 std::cin >> choice;
+
+                while(!(choice == "Y" || choice == "N"))
+                {
+                    std::cout << players[n].Name << " you didn't type Y or N, would you like another card? Your current hand has the value: " << score << std::endl;
+                    std::cin >> choice;
+                }
             }
             else{
                 choice = "N";
@@ -295,6 +301,12 @@ int main() {
                     std::cout << "The added value of your hand is now: " << score << std::endl;
                     std::cout << players[n].Name << ", do you want to draw another card? " << std::endl;
                     std::cin >> choice;
+
+                    while(!(choice == "Y" || choice == "N"))
+                    {
+                        std::cout << players[n].Name << " you didn't type Y or N, would you like another card? Your current hand has the value:  " << score << std::endl;
+                        std::cin >> choice;
+                    }
                 }
                 else{
                     int score = players[n].calculate_score();
@@ -304,8 +316,15 @@ int main() {
             }
         }
 
+        std::cout << "The current hand of the dealer is: ";
+        Dealer.display_full_hand();
+        std::cout << std::endl;
+
         while(Dealer.calculate_score() < 16){
-            Dealer.get_card(deck.draw_card());
+            int new_card_dealer = deck.draw_card();
+            Dealer.get_card(new_card_dealer);
+            std::cout << "The dealer draws the card: " << new_card_dealer << std::endl;
+
         }
 
         if(Dealer.calculate_score() > 21){
