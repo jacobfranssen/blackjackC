@@ -30,7 +30,7 @@ public:
             finaldeck[position] = finaldeck[remaining_cards-1];
             finaldeck[remaining_cards - 1] = temp;
 
-            std::cout << temp << std::endl;
+            //std::cout << temp << std::endl;
             remaining_cards --;
             finaldeck.resize(remaining_cards);
         }
@@ -149,8 +149,7 @@ public:
                 choice="Split";
                 break;
         }
-
-
+        
         return choice;
     }
 
@@ -254,9 +253,11 @@ public:
 
 class player{
 public:
-    std:: string Name="name";
+
+    std::string Name="name";
     std::array<int, 21> hand;
-    int wallet =0;
+    int wallet = 0;
+    int score_above_21 = 0; 
 
     void set_name(std::string name){
         Name=name;
@@ -309,6 +310,13 @@ public:
         for(int value:hand){
             score=score+value;
         }
+
+        std::cout << "The added values of your cards is: " << score << std::endl;
+
+        if(score > 21){
+            score_above_21 = 1;
+        }
+
         return score;
     }
 
@@ -364,16 +372,6 @@ int initialisation_amount_of_players(){
     return NumberOfPlayers;
 }
 
-std::string initialisation_names(int i){
-
-    std::string Name;
-    std::cout << "Please type the name of player number " << i << " here: " << std::endl;
-    std::cin >> Name;
-    std::cout << std::endl;
-
-    return Name;
-}
-
 int initialisation_number_of_decks(){
     int Number_of_Decks;
 
@@ -387,22 +385,101 @@ int initialisation_number_of_decks(){
 }
 
 int main() {
-
-    int Amount_of_Players = initialisation_amount_of_players();
     Blackjack game;
+    dealer Dealer;
+    void initialise_players();
+    int Amount_of_Players = initialisation_amount_of_players();
     game.set_number_of_players(Amount_of_Players);                                      //This function gets the amount of players from the user.
+    
     std::vector<std::string> PlayerNames = {};                                          //This is the vector in which the name of the players will be stored.
 
+    player *players = new player[Amount_of_Players];
+
     for(int i = 1; i <= Amount_of_Players; i++){                                        //This loop fills the vector with names.
-        std::string Name = initialisation_names(i);
-        PlayerNames.push_back(Name);                
+        std::string Name;
+        std::cout << "Please insert the name of player number " << i << " here: " << std::endl;
+        std::cin >> Name;
+        players[i-1].set_name(Name);
     }
 
     int Number_of_Decks = initialisation_number_of_decks();                             //This line obtains the amount of decks that will be used. 
     carddeck deck;
     deck.set_number_of_decks(Number_of_Decks);
 
+    // THE GAME STARTS HERE!
+    bool continue_game = 1;
+    while(continue_game == 1){
+        Dealer.clear_hand();                                                            // clearing the hand of the dealer at the start 
+
+        for(int j = 0; j < game.number_of_players; j++){                                // clearing the hand of every player at the start
+            players[j].clear_hand();
+        }
+
+        for(int i = 0; i<2; i++){
+            Dealer.get_card(deck.draw_card());
+        }
+
+        if(Dealer.calculate_score() == 21){
+            std::cout << "The dealer has BlackJack, the next round starts now." << std::endl;
+        }
+        else{
+            Dealer.display_second_card();
+        }
+
+        for(int l = 0; l<2; l++){
+            for(int k = 0; k < game.number_of_players; k++){
+                players[k].get_card(deck.draw_card());
+            }
+        }
+
+        for(int m = 0; m < game.number_of_players; m++){
+            players[m].display_hand();
+
+            if(players[m].calculate_score() == 21){
+                std::cout << "this player has blackjack!" << std::endl;
+            }
+        }
+
+        for(int n = 0; n < game.number_of_players; n++){
+            std::string choice = "Y"; 
+            std::cout << players[n].Name << ", do you want to draw another card? " << std::endl;
+            std::cin >> choice;
+
+            while(choice == "Y"){
+                players[n].get_card(deck.draw_card());
+                players[n].calculate_score();
+                if(players[n].score_above_21 == 0){
+                    std::cout << players[n].Name << ", do you want to draw another card? " << std::endl;
+                    std::cin >> choice;
+                }
+                else{
+                    int score = players[n].calculate_score();
+                    std::cout << "You unfortunately passed 21 and are therefor busted, the added value of your hand is " << score << std::endl;
+                    choice = "N";
+                }
+            }
+        }
+
+        for(int o = 0; o < game.number_of_players; o++){
+            int score = players[o].calculate_score();
+            int score_dealer = Dealer.calculate_score();
+            if(players[o].score_above_21 == 0 && score > score_dealer){
+                std::cout << players[o].Name << " congratulations you've beaten the dealer!" << std::endl;
+            }
+            else{
+                std::cout << players[o].Name << " You messed it up!" << std::endl;
+            }
+        }
+
+        int score_dealer = Dealer.calculate_score();
+        std::cout << "this is the score of the dealer: " << score_dealer << std::endl;
+
+        std::cout << "do you want to continue the game, if yes type 1, if no type 0. " << std::endl;
+        std::cin >> continue_game;
+    }
+
     return 0;
 }
+
 
 
