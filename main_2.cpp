@@ -81,7 +81,6 @@ public:
     }
 
     int calculate_score(){
-        //int score=0;
         int index= 0;
         for(int value:hand){
             if(value==11){
@@ -108,10 +107,11 @@ public:
 
 class player{
 public:
-
     std::string Name="name";
     std::array<int, 21> hand;
+
     int wallet = 0;
+
     int score_above_21 = 0; 
 
     void set_name(std::string name){
@@ -224,7 +224,6 @@ int initialisation_number_of_decks(){
 int main() {
     Blackjack game;
     dealer Dealer;
-    void initialise_players();
     int Amount_of_Players = initialisation_amount_of_players();
     game.set_number_of_players(Amount_of_Players);                                      //This function gets the amount of players from the user.
     
@@ -243,9 +242,10 @@ int main() {
     carddeck deck;
     deck.set_number_of_decks(Number_of_Decks);
 
-    // THE GAME STARTS HERE!
+    // THE GAME STARTS HERE!!
     bool continue_game = 1;
     while(continue_game == 1){
+        int number_of_fails = 0;
         Dealer.clear_hand();                                                            // clearing the hand of the dealer at the start 
 
         for(int j = 0; j < game.number_of_players; j++){                                // clearing the hand of every player at the start
@@ -256,7 +256,9 @@ int main() {
             Dealer.get_card(deck.draw_card());
         }
 
-        if(Dealer.calculate_score() == 21){
+        int score_dealer = Dealer.calculate_score();
+
+        if(score_dealer == 21){
             std::cout << "The dealer has BlackJack, the next round starts now." << std::endl;
         }
         else{
@@ -273,39 +275,75 @@ int main() {
             players[m].display_hand();
 
             if(players[m].calculate_score() == 21){
-                std::cout << "this player has blackjack!" << std::endl;
+                std::cout << "This player has blackjack!" << std::endl;
             }
         }
 
         for(int n = 0; n < game.number_of_players; n++){
             std::string choice = "Y"; 
+            int score = players[n].calculate_score();
             if(players[n].calculate_score() != 21){
+                std::cout << std::endl;
                 std::cout << players[n].Name << ", do you want to draw another card? " << std::endl;
                 std::cin >> choice;
+
+                while(!(choice == "Y" || choice == "N"))
+                {
+                    std::cout << players[n].Name << " you didn't type Y or N, would you like another card? Your current hand has the value: " << score << std::endl;
+                    std::cin >> choice;
+                }
             }
             else{
                 choice = "N";
             }
 
             while(choice == "Y"){
-                players[n].get_card(deck.draw_card());
+                int drawn_card = deck.draw_card();
+                std::cout << std::endl;
+                std::cout << "You drew the card: " << drawn_card << std::endl;
+                std::cout << std::endl;
+                players[n].get_card(drawn_card);
                 players[n].calculate_score();
                 int score = players[n].calculate_score();
                 if(players[n].score_above_21 == 0 && score != 21){
                     std::cout << "The added value of your hand is now: " << score << std::endl;
                     std::cout << players[n].Name << ", do you want to draw another card? " << std::endl;
                     std::cin >> choice;
+
+                    while(!(choice == "Y" || choice == "N"))
+                    {
+                        std::cout << players[n].Name << " you didn't type Y or N, would you like another card? Your current hand has the value:  " << score << std::endl;
+                        std::cin >> choice;
+                    }
                 }
-                else{
+                else if(score > 21){
                     int score = players[n].calculate_score();
                     std::cout << "You unfortunately passed 21 and are therefor busted, the added value of your hand is " << score << std::endl;
+                    number_of_fails++;
+                    choice = "N";
+                }
+                else{
                     choice = "N";
                 }
             }
         }
 
+        if(number_of_fails == game.number_of_players){
+            std::cout << std::endl;
+            std::cout << "Unfortunately every player exceeded 21, therefor this round is over." << std::endl;
+            std::cout << std::endl;
+            goto AllPlayersExceeded21;
+        }
+
+        std::cout << "The current hand of the dealer is: ";
+        Dealer.display_full_hand();
+        std::cout << std::endl;
+
         while(Dealer.calculate_score() < 16){
-            Dealer.get_card(deck.draw_card());
+            int new_card_dealer = deck.draw_card();
+            Dealer.get_card(new_card_dealer);
+            std::cout << "The dealer draws the card: " << new_card_dealer << std::endl;
+            std::cout << std::endl;
         }
 
         if(Dealer.calculate_score() > 21){
@@ -313,9 +351,10 @@ int main() {
             std::cout << "The dealer is busted, he exceeded 21." << std::endl;
         }
 
+        score_dealer = Dealer.calculate_score();
+
         for(int o = 0; o < game.number_of_players; o++){
             int score = players[o].calculate_score();
-            int score_dealer = Dealer.calculate_score();
             if(players[o].score_above_21 == 0 && score >= score_dealer){
                 std::cout << players[o].Name << " congratulations you've beaten the dealer!" << std::endl;
                 std::cout << std::endl;
@@ -326,9 +365,13 @@ int main() {
             }
         }
 
-        int score_dealer = Dealer.calculate_score();
+        std::cout << "The hand of the dealer consists out of: ";
+        Dealer.display_full_hand();
+        std::cout << std::endl;
         std::cout << "this is the score of the dealer: " << score_dealer << std::endl;
         std::cout << std::endl;
+        
+        AllPlayersExceeded21: 
 
         std::cout << "do you want to continue the game, if yes type 1, if no type 0. " << std::endl;
         std::cin >> continue_game;
@@ -336,6 +379,3 @@ int main() {
 
     return 0;
 }
-
-
-
