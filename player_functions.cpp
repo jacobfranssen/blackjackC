@@ -1,5 +1,5 @@
 #include <iostream>
-#include "h_files/class_player.h"
+#include "class_player.h"
 
 player::set_name(std::string name)
 {

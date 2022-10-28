@@ -1,3 +1,6 @@
+#ifndef CLASS_BLACKJACK
+#define CLASS_BLACKJACK
+
 #include <iostream>
 #include <array>
 #include <string>
@@ -27,6 +30,4 @@ public:
     void play();
 };
 
-//constructor
-//preset amount of players
-//make players a vector
+#endif

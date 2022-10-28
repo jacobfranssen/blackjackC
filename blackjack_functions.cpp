@@ -1,5 +1,5 @@
 #include <iostream>
-#include "h_files\class_blackjack.h"
+#include "class_blackjack.h"
 
 Blackjack::initialisation_amount_of_players()
 {

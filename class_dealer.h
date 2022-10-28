@@ -1,3 +1,6 @@
+#ifndef CLASS_DEALER
+#define CLASS_DEALER
+
 #include <iostream>
 #include <array>
 #include <string>
@@ -22,3 +25,5 @@ public:
     int calculate_score();
 
 };
+
+#endif

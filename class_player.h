@@ -1,3 +1,6 @@
+#ifndef CLASS_PLAYER
+#define CLASS_PLAYER
+
 #include <iostream>
 #include <array>
 #include <string>
@@ -27,3 +30,5 @@ public:
 
     void increase_wallet(int amount);
 };
+
+#endif

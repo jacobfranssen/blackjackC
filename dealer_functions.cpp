@@ -1,5 +1,5 @@
 #include <iostream>
-#include "h_files/class_dealer.h"
+#include "class_dealer.h"
 
 dealer::display_second_card()
 {

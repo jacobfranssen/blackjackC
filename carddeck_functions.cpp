@@ -1,5 +1,5 @@
 #include <iostream>
-#include "h_files/class_carddeck.h"
+#include "class_carddeck.h"
 
 carddeck::set_number_of_decks(int number)
 {
