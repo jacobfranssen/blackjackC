@@ -4,7 +4,6 @@
 #include <fstream>
 #include <time.h>
 #include <vector>
-#pragma once
 
 class player
 {

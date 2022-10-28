@@ -4,7 +4,6 @@
 #include <fstream>
 #include <time.h>
 #include <vector>
-#pragma once
 
 class carddeck{
 public:
@@ -17,6 +16,5 @@ public:
     void set_number_of_decks(int number);
 
     int draw_card();
-    
-    return temp;
+
 };

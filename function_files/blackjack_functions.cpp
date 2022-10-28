@@ -1,5 +1,5 @@
 #include <iostream>
-#include "h_files/class_blackjack.h"
+#include "h_files\class_blackjack.h"
 
 Blackjack::initialisation_amount_of_players()
 {
@@ -11,6 +11,11 @@ Blackjack::initialisation_amount_of_players()
         std::cout << std::endl;
     }
     Amount_of_Players = Number;
+}
+
+Blackjack::resize()
+{
+    players.resize(Amount_of_Players);
 }
 
 Blackjack::give_names()
