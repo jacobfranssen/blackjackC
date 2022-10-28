@@ -1,10 +1,10 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "class_blackjack.h"
+#include "class_player.h"
 #include "class_carddeck.h"
 #include "class_dealer.h"
-#include "class_player.h"
+#include "class_blackjack.h"
 
 //g++ main.cpp blackjack_functions.cpp dealer_functions.cpp carddeck_functions.cpp player_functions.cpp
 

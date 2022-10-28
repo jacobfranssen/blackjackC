@@ -1,7 +1,11 @@
 #include <iostream>
+#include <vector>
 #include "class_blackjack.h"
+#include "class_carddeck.h"
+#include "class_dealer.h"
+#include "class_player.h"
 
-Blackjack::initialisation_amount_of_players()
+void Blackjack::initialisation_amount_of_players()
 {
     int Number = 0;
     while (Number <= 0 || Number >= 10)
@@ -13,12 +17,12 @@ Blackjack::initialisation_amount_of_players()
     Amount_of_Players = Number;
 }
 
-Blackjack::resize()
+void Blackjack::resize()
 {
     players.resize(Amount_of_Players);
 }
 
-Blackjack::give_names()
+void Blackjack::give_names()
 {
     for (int i = 0; i < Amount_of_Players; i++)
     {
@@ -29,7 +33,7 @@ Blackjack::give_names()
     }
 }
 
-Blackjack::initialisation_number_of_decks()
+void Blackjack::initialisation_number_of_decks()
 {
     while (Number_of_Decks <= 0 || Number_of_Decks >= 10)
     {
@@ -39,7 +43,7 @@ Blackjack::initialisation_number_of_decks()
     }
 }
 
-Blackjack::play()
+void Blackjack::play()
 {
     dealer Dealer;
     carddeck deck;

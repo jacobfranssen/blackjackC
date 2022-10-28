@@ -1,7 +1,10 @@
 #include <iostream>
+#include "class_blackjack.h"
+#include "class_carddeck.h"
 #include "class_dealer.h"
+#include "class_player.h"
 
-dealer::display_second_card()
+void dealer::display_second_card()
 {
     std::cout << "The hand of the " << Name << " is:\t";
     std::cout << "?"
@@ -16,7 +19,7 @@ dealer::display_second_card()
     std::cout << std::endl;
 }
 
-dealer::display_full_hand()
+void dealer::display_full_hand()
 {
     for (int i = 0; i < 21; i++)
     {
@@ -28,7 +31,7 @@ dealer::display_full_hand()
     std::cout << std::endl;
 }
 
-dealer::clear_hand()
+void dealer::clear_hand()
 {
     for (int i = 0; i < hand.size(); i++)
     {
@@ -36,7 +39,7 @@ dealer::clear_hand()
     };
 }
 
-dealer::get_card(int number)
+void dealer::get_card(int number)
 {
     int i = 0;
 
@@ -47,7 +50,7 @@ dealer::get_card(int number)
     hand[i] = number;
 }
 
-dealer::calculate_score()
+int dealer::calculate_score()
 {
     // int score=0;
     int index = 0;

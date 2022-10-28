@@ -1,12 +1,15 @@
 #include <iostream>
+#include "class_blackjack.h"
+#include "class_carddeck.h"
+#include "class_dealer.h"
 #include "class_player.h"
 
-player::set_name(std::string name)
+void player::set_name(std::string name)
 {
     Name = name;
 }
 
-player::display_hand()
+void player::display_hand()
 {
     std::cout << "The hand of " << Name << " is:\t";
     for (int i = 0; i < 21; i++)
@@ -19,7 +22,7 @@ player::display_hand()
     std::cout << std::endl;
 }
 
-player::clear_hand(void)
+void player::clear_hand(void)
 {
 
     for (int i = 0; i < hand.size(); i++)
@@ -28,7 +31,7 @@ player::clear_hand(void)
     };
 }
 
-player::get_card(int number)
+void player::get_card(int number)
 {
     int i = 0;
     while (hand[i] != 0)
@@ -38,7 +41,7 @@ player::get_card(int number)
     hand[i] = number;
 }
 
-player::calculate_score()
+int player::calculate_score()
 {
     // int score=0;
     int index = 0;
@@ -72,7 +75,7 @@ player::calculate_score()
     return score;
 }
 
-player::place_bet(int bet)
+int player::place_bet(int bet)
 {
     if (bet > wallet)
     {
@@ -82,7 +85,7 @@ player::place_bet(int bet)
     return bet;
 }
 
-player::increase_wallet(int amount)
+void player::increase_wallet(int amount)
 {
     wallet = wallet + amount;
 }

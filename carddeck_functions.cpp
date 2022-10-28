@@ -1,7 +1,10 @@
 #include <iostream>
+#include "class_blackjack.h"
 #include "class_carddeck.h"
+#include "class_dealer.h"
+#include "class_player.h"
 
-carddeck::set_number_of_decks(int number)
+void carddeck::set_number_of_decks(int number)
 {
     number_of_decks = number;
     for (int i = 0; i < number; i++)
@@ -11,7 +14,7 @@ carddeck::set_number_of_decks(int number)
     remaining_cards = remaining_cards * number_of_decks;
 }
 
-carddeck::draw_card()
+int carddeck::draw_card()
 {
     int temp = 0;
 
@@ -27,4 +30,5 @@ carddeck::draw_card()
         remaining_cards--;
         finaldeck.resize(remaining_cards);
     }
+    return temp;
 }
