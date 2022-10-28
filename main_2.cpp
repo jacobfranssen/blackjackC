@@ -7,7 +7,7 @@
 
 class carddeck{
 public:
-    int number_of_decks;
+    int number_of_decks = 0;
     int remaining_cards = 52;
     std::vector<int> carddeck = {2,3,4,5,6,7,8,9,10,10,10,10,11,2,3,4,5,6,7,8,9,10,10,10,10,11,2,3,4,5,6,7,8,9,10,10,10,10,11,2,3,4,5,6,7,8,9,10,10,10,10,11};
     std::vector<int> finaldeck = {};
@@ -19,6 +19,15 @@ public:
         }
         remaining_cards = remaining_cards * number_of_decks;
     }    
+
+    void initialisation_number_of_decks(){
+        while(number_of_decks <= 0 || number_of_decks >= 10){
+            std::cout << "Please insert the number of decks here, a number between 1 and 10: " << std::endl;
+            std::cin >> number_of_decks;
+            std::cout << std::endl;
+        }
+    return;
+}
 
     int draw_card(){
         int temp = 0;
@@ -209,21 +218,11 @@ int initialisation_amount_of_players(){
     return NumberOfPlayers;
 }
 
-int initialisation_number_of_decks(){
-    int Number_of_Decks;
-
-    while(Number_of_Decks <= 0 || Number_of_Decks >= 10){
-        std::cout << "Please insert the number of decks here, a number between 1 and 10: " << std::endl;
-        std::cin >> Number_of_Decks;
-        std::cout << std::endl;
-    }
-
-    return Number_of_Decks;
-}
-
 int main() {
     Blackjack game;
     dealer Dealer;
+    carddeck deck;
+
     int Amount_of_Players = initialisation_amount_of_players();
     game.set_number_of_players(Amount_of_Players);                                      //This function gets the amount of players from the user.
     
@@ -238,9 +237,8 @@ int main() {
         players[i-1].set_name(Name);
     }
 
-    int Number_of_Decks = initialisation_number_of_decks();                             //This line obtains the amount of decks that will be used. 
-    carddeck deck;
-    deck.set_number_of_decks(Number_of_Decks);
+    deck.initialisation_number_of_decks();                                              //This line obtains the amount of decks that will be used. 
+    deck.set_number_of_decks(deck.number_of_decks);
 
     // THE GAME STARTS HERE!!
     bool continue_game = 1;
