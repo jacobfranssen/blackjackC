@@ -16,19 +16,26 @@ void carddeck::set_number_of_decks(int number)
 
 int carddeck::draw_card()
 {
-    int temp = 0;
+    int temp = 0; // variable where the card will be stored
 
-    if (remaining_cards > 0)
-    {
-        int position = rand() % remaining_cards;
-        temp = finaldeck[position]; // drawn card
+    if(remaining_cards > 0){  // check if there are cards in the deck
+        int position = rand() % remaining_cards; // randomly choose the position in the deck
+        temp = finaldeck[position];              // find the card
 
-        finaldeck[position] = finaldeck[remaining_cards - 1];
-        finaldeck[remaining_cards - 1] = temp;
+        finaldeck[position] = finaldeck[remaining_cards - 1]; // put the card at the end of the deck on the position of the drawn card
+        finaldeck[remaining_cards - 1] = temp;                // put the drawn card at the end of the deck
 
-        // std::cout << temp << std::endl;
-        remaining_cards--;
-        finaldeck.resize(remaining_cards);
+        remaining_cards--;                 // number of cards decreases by 1
+        finaldeck.resize(remaining_cards); // size of the deck decreases by 1
     }
-    return temp;
+    else{
+        std::cout << "There are no cards left in the deck" << std::endl; // if there are no cards left give message
+    }
+
+    if (remaining_cards < 10){ // if there are less than 10 cards make sure a new deck is generated of
+        std::cout << "Only " << remaining_cards << " were left in the dek, therefore we start with 1 deck of cards again" << std::endl;
+        set_number_of_decks(1);
+    }
+    
+    return temp; // return the drawn card
 }

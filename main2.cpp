@@ -240,6 +240,7 @@ public:
 
 
     }
+    
     std::string raise_question_user_extra_card(std::string Pos_answer_1,std::string Pos_answer_2,std::string player_name){
         std::string choice_player="--";
         std::string choice="-";
@@ -258,6 +259,7 @@ public:
         choice_player="--";
         return choice;
     }
+
     int players_in_game(){
         int n_players_in_game=number_of_players;
         for(int i = 0; i < number_of_players; i++){
@@ -378,10 +380,6 @@ public:
     }
 };
 
-
-
-
-
 int main() {
     Blackjack game;
 
@@ -391,12 +389,7 @@ int main() {
 
     game.give_names();
 
-
-
-
     game.initialisation_number_of_decks();                             //This line obtains the amount of decks that will be used.
-
-
 
     // THE GAME STARTS HERE!
     game.play();

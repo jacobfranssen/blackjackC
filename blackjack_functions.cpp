@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <string>
 #include "class_blackjack.h"
 #include "class_carddeck.h"
 #include "class_dealer.h"
@@ -43,6 +44,27 @@ void Blackjack::initialisation_number_of_decks()
     }
 }
 
+std::string raise_question_user_extra_card(std::string Pos_answer_1, std::string Pos_answer_2, std::string player_name){
+    std::string choice_player = "--";
+    std::string choice = "-";
+
+    while (!(choice_player == Pos_answer_1 or choice_player == Pos_answer_2))
+    {
+        std::cout << player_name << ", do you want to draw another card? Enter Yes or No " << std::endl;
+        std::cin >> choice_player;
+        if (choice_player == "Yes")
+        {
+            choice = "Y";
+        }
+        else
+        {
+            choice = "N";
+        }
+    }
+    choice_player = "--";
+    return choice;
+}
+
 void Blackjack::play()
 {
     dealer Dealer;
@@ -74,35 +96,28 @@ void Blackjack::play()
             Dealer.display_second_card();
         }
 
-        for (int l = 0; l < 2; l++)
-        {
+        for (int l = 0; l < 2; l++){
             for (int k = 0; k < Amount_of_Players; k++)
             {
                 players[k].get_card(deck.draw_card());
             }
         }
 
-        for (int m = 0; m < Amount_of_Players; m++)
-        {
+        for (int m = 0; m < Amount_of_Players; m++){
             players[m].display_hand();
 
             if (players[m].calculate_score() == 21)
             {
-                std::cout << "this player has blackjack!" << std::endl;
+                std::cout << "This player has blackjack!" << std::endl;
             }
         }
 
         for (int n = 0; n < Amount_of_Players; n++)
         {
-            std::string choice = "Y";
-            if (players[n].calculate_score() != 21)
-            {
-                std::cout << players[n].Name << ", do you want to draw another card? " << std::endl;
-                std::cin >> choice;
-            }
-            else
-            {
-                choice = "N";
+            std::string choice = "--";
+            std::string choice_player = "--";
+            if (players[n].calculate_score() != 21){
+                choice = raise_question_user_extra_card("Yes", "No", players[n].Name);
             }
 
             while (choice == "Y")
@@ -110,20 +125,11 @@ void Blackjack::play()
                 players[n].get_card(deck.draw_card());
                 players[n].calculate_score();
                 int score = players[n].calculate_score();
-                if (players[n].score_above_21 == 0 && score != 21)
-                {
+                if (players[n].score_above_21 == 0){
                     std::cout << "The added value of your hand is now: " << score << std::endl;
-                    std::cout << players[n].Name << ", do you want to draw another card? " << std::endl;
-                    std::cin >> choice;
+                    choice = raise_question_user_extra_card("Yes", "No", players[n].Name);
                 }
-                else if (score == 21)
-                {
-                    std::cout << "The added value of your hand is 21, you do not have to draw another card. " << std::endl;
-                    std::cout << std::endl;
-                    choice = "N";
-                }
-                else
-                {
+                else{
                     std::cout << "You unfortunately passed 21 and are therefor busted, the added value of your hand is " << score << std::endl;
                     std::cout << std::endl;
                     choice = "N";
