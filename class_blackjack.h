@@ -1,3 +1,6 @@
+#ifndef CLASS_BLACKJACK
+#define CLASS_BLACKJACK
+
 #include <iostream>
 #include <array>
 #include <string>
@@ -5,16 +8,14 @@
 #include <time.h>
 #include <vector>
 #include <string>
+#include "class_player.h"
 
 class Blackjack
 {
 public:
-    int Amount_of_Players = 4;
+    int Amount_of_Players = 0;
     int Number_of_Decks;
-
-    game(){
-        std::vector<std::string> players[Amount_of_Players];
-    }
+    std::vector<player> players;
 
     void initialisation_amount_of_players();
 
@@ -27,6 +28,4 @@ public:
     void play();
 };
 
-//constructor
-//preset amount of players
-//make players a vector
+#endif

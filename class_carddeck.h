@@ -1,3 +1,6 @@
+#ifndef CLASS_CARDDECK
+#define CLASS_CARDDECK
+
 #include <iostream>
 #include <array>
 #include <string>
@@ -18,3 +21,5 @@ public:
     int draw_card();
 
 };
+
+#endif

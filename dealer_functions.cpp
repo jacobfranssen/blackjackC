@@ -1,14 +1,26 @@
 #include <iostream>
-#include "h_files/class_player.h"
+#include "class_blackjack.h"
+#include "class_carddeck.h"
+#include "class_dealer.h"
+#include "class_player.h"
 
-player::set_name(std::string name)
+void dealer::display_second_card()
 {
-    Name = name;
+    std::cout << "The hand of the " << Name << " is:\t";
+    std::cout << "?"
+              << ", ";
+    for (int i = 1; i < 21; i++)
+    {
+        if (hand[i] != 0)
+        {
+            std::cout << hand[i] << ", ";
+        }
+    }
+    std::cout << std::endl;
 }
 
-player::display_hand()
+void dealer::display_full_hand()
 {
-    std::cout << "The hand of " << Name << " is:\t";
     for (int i = 0; i < 21; i++)
     {
         if (hand[i] != 0)
@@ -19,26 +31,26 @@ player::display_hand()
     std::cout << std::endl;
 }
 
-player::clear_hand(void)
+void dealer::clear_hand()
 {
-
     for (int i = 0; i < hand.size(); i++)
     {
         hand[i] = 0;
     };
 }
 
-player::get_card(int number)
+void dealer::get_card(int number)
 {
     int i = 0;
+
     while (hand[i] != 0)
     {
         i = i + 1;
-    };
+    }
     hand[i] = number;
 }
 
-player::calculate_score()
+int dealer::calculate_score()
 {
     // int score=0;
     int index = 0;
@@ -63,26 +75,5 @@ player::calculate_score()
     {
         score = score + value;
     }
-
-    if (score > 21)
-    {
-        score_above_21 = 1;
-    }
-
     return score;
-}
-
-player::place_bet(int bet)
-{
-    if (bet > wallet)
-    {
-        std::cout << Name << "has not enough money, wallet runs negative" << std::endl;
-    }
-    wallet = wallet - bet;
-    return bet;
-}
-
-player::increase_wallet(int amount)
-{
-    wallet = wallet + amount;
 }
