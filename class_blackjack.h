@@ -27,7 +27,7 @@ public:
 
     void initialisation_number_of_decks();
 
-    std::string raise_question_user_extra_card(std::string Pos_answer_1,std::string Pos_answer_2,std::string player_name);
+    std::string raise_question_user_extra_card(std::string Pos_answer_1, std::string Pos_answer_2, std::string player_name);
 
     void play();
 };
