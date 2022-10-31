@@ -197,17 +197,12 @@ public:
 
 class Blackjack{ // class were all functions and variables nessecarry for the game are stored
 public:
-    int number_of_players=0; // don't think this will be used
-    int Amount_of_Players;
-    player *players = new player[Amount_of_Players];
-    int Number_of_Decks;
+    int Amount_of_Players; // number of players, the game will be played with
+    player *players = new player[Amount_of_Players]; // vector with class players will be resized based on the number of players
+    int Number_of_Decks; // number of decks we will play with
 
 
-    void set_number_of_players(int number){
-        number_of_players = number;
-    }
-
-    void initialisation_amount_of_players(){
+    void initialisation_amount_of_players(){ // indicate number of players
         int NumberOfPlayers = 0;
         int AmountOfCarddecks = 0;
 
@@ -240,15 +235,14 @@ public:
 
 
     }
-    
     std::string raise_question_user_extra_card(std::string Pos_answer_1,std::string Pos_answer_2,std::string player_name){
         std::string choice_player="--";
         std::string choice="-";
 
-        while(!(choice_player==Pos_answer_1 or choice_player== Pos_answer_2)){
+        while(!(choice_player==Pos_answer_1 or choice_player== Pos_answer_2)){ // if input is not possible input raise question again
             std::cout << player_name << ", do you want to draw another card? Enter Yes or No " << std::endl;
-            std::cin >> choice_player;
-            if(choice_player=="Yes"){
+            std::cin >> choice_player; // store input user in choice player
+            if(choice_player=="Yes"){ // based on input user store decision in choice
                 choice="Y";
             }
             else{
@@ -256,27 +250,26 @@ public:
             }
 
         }
-        choice_player="--";
-        return choice;
+        choice_player="--"; // set choice_player to default again
+        return choice; // return the decision
     }
-
     int players_in_game(){
         int n_players_in_game=number_of_players;
         for(int i = 0; i < number_of_players; i++){
             n_players_in_game=n_players_in_game-players[i].score_above_21;
         };
-        return n_players_in_game;
+        return n_players_in_game; // return the number of players that are left in the game
     }
-    void play(){
-        dealer Dealer;
-        carddeck deck;
-        deck.set_number_of_decks(Number_of_Decks);
-        int score;
+    void play(){ // start the game
+        dealer Dealer; // initialize Dealer of class dealer
+        carddeck deck; // initalize carddeck of class deck
+        deck.set_number_of_decks(Number_of_Decks); // provide the class with the number of deck that will be used
+        int score; //
         bool continue_game = true;
         while(continue_game == true){
             Dealer.clear_hand();                                                            // clearing the hand of the dealer at the start
 
-            for(int j = 0; j < number_of_players; j++){                                // clearing the hand of every player at the start
+            for(int j = 0; j < Amount_of_Players; j++){                                // clearing the hand of every player at the start
                 players[j].clear_hand();
             }
 
@@ -292,12 +285,12 @@ public:
             }
 
             for(int l = 0; l<2; l++){
-                for(int k = 0; k < number_of_players; k++){
+                for(int k = 0; k < Amount_of_Players; k++){
                     players[k].get_card(deck.draw_card());
                 }
             }
 
-            for(int m = 0; m < number_of_players; m++){
+            for(int m = 0; m < Amount_of_Players; m++){
                 players[m].display_hand();
 
                 if(players[m].calculate_score() == 21){
@@ -305,7 +298,7 @@ public:
                 }
             }
 
-            for(int n = 0; n < number_of_players; n++){
+            for(int n = 0; n < Amount_of_Players; n++){
                 std::string choice = "--";
                 std::string choice_player = "--";
                 if(players[n].calculate_score() != 21) {
@@ -348,7 +341,7 @@ public:
                     std::cout << std::endl;
                 }
             }
-            for(int o = 0; o < number_of_players; o++){
+            for(int o = 0; o < Amount_of_Players; o++){
                 score = players[o].calculate_score();
                 int score_dealer = Dealer.calculate_score();
                 if(players[o].score_above_21 == 0 && score >= score_dealer){
