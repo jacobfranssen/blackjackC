@@ -22,7 +22,7 @@ public:
     void initialisation_amount_of_players();
 
     void resize();
-    
+
     void give_names();
 
     void initialisation_number_of_decks();

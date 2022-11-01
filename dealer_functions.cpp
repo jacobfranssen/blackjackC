@@ -56,8 +56,8 @@ int dealer::calculate_score()
             if (score > 21){ // if the score of the hand turns out to be higher than 21, the ace turns into a 1
                 hand[index] = 1;
             }
-            index = index + 1; // move to the next index of the hand
         }
+        index = index + 1; // move to the next index of the hand
     }
     int score = 0;
     for (int value : hand){ // calculate the score of the hand again with the aces being the righ value
